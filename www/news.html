@@ -27,7 +27,22 @@
 			
 			//onDeviceReady();
 		}
-
+		function show_id(id) {
+		{
+			var networkState = navigator.connection.type;
+			if (networkState == Connection.NONE) {
+				navigator.notification.alert(
+					'شما برای مشاهده این صفحه نیاز به اینترنت دارید',  // message
+					alertDismissed,         // callback
+					'اخطار',            // title
+					'تائید'                  // buttonName
+				);
+			}
+			else
+			{
+				window.location.href = "news_in.html?id=" + id;
+			}
+		}
 		function onDeviceReady() {
 
 			//FastClick.attach(document.getElementById('container'));
@@ -48,14 +63,8 @@
 		};
 		
 		$(window).load(function() {
-			//alert($(window).height());
-			//alert($(window).height());
-			//alert($(document).height()); 
-			//alert($("#warper").height());
-			$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
-			$(".akhbarha li a").width($(window).width()-115);
-			//$("#container").height($("#warper").height()-$("#header").height());
-			//$(".mypreload").delay(100000).html("");
+			//$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
+			//$(".akhbarha li a").width($(window).width()-115);
 		});
 		$(document).ready(function() {
 			$('.translate').on('click', function() {
@@ -98,9 +107,35 @@
 					success : function(text)
 					{
 						$('.akhbarha').html(text);
+						
+						max_width = 0;
+						
+						$('.news').each( function(i) {
+							if(max_width<$(this).width())
+								max_width = $(this).width();
+						});
+						
+						setTimeout(function(){
+							$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
+							$(".akhbarha li").width($(window).width()-max_width-15);
+							setTimeout(function(){						
+								$(".mypreload").html("");
+								$('#main').addClass("simplebar");
+								$('#main').simplebar({ autoHide: false });
+							}, 300);
+						}, 100);
 					},
 					error: function(jqXHR, exception) {
-						$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');				
+						setTimeout(function(){
+							$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
+							$(".akhbarha li a").width($(window).width()-115);
+							setTimeout(function(){						
+								$(".mypreload").html("");
+								$('#main').addClass("simplebar");
+								$('#main').simplebar({ autoHide: false });
+							}, 300);
+						}, 100);
 						/*
 						if (jqXHR.status === 0) {
 							$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
@@ -125,9 +160,9 @@
 			});
 		
 			setTimeout(function(){
-				$(".mypreload").html("");
-				$('#main').addClass("simplebar");
-				$('#main').simplebar({ autoHide: false });
+				//$(".mypreload").html("");
+				//$('#main').addClass("simplebar");
+				//$('#main').simplebar({ autoHide: false });
 			}, 300);
 		});
 
@@ -225,15 +260,8 @@ span.date_text {
 			<div id="main" >
 			
 				<ol class="akhbarha" type="1">
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date_text">آذر</span><span class="date_numb">2</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-					<li><a href="news_in.html">سردار احمدی:تراکم جمعیت در مهران زایران از مرزهای دیگر تردد کنند</a><span class="date">2آذر</span><span class="time">12:15</span></li>
-
+					در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد
+					<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 10; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>
 				</ol>
 
 			
