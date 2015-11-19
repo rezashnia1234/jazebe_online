@@ -63,7 +63,7 @@
 
 	
 	
-	<gap:plugin name="ir.smgroup.smslocationnotifier" />
+	<!--<gap:plugin name="ir.smgroup.smslocationnotifier" />-->
     <!-- Third party plugins -->
     <!-- A list of available plugins are available at https://build.phonegap.com/plugins -->
     <!-- 
