@@ -88,6 +88,41 @@
 			});
 */
 		
+			$.ajax({
+					url: "http://dlsmgroup.ir/jazebe_huseini/news/report.php",
+					type: "POST",
+					data: {
+						testdata: "786"
+					},
+					async: true,
+					success : function(text)
+					{
+						$('.akhbarha').html(text);
+					},
+					error: function(jqXHR, exception) {
+						$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						/*
+						if (jqXHR.status === 0) {
+							$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						} else if (jqXHR.status == 404) {
+							$('#main').html('صفحه مورد نظر شما یافت نشد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						} else if (jqXHR.status == 500) {
+							$('#main').html('Internal Server Error [500].<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						} else if (exception === 'parsererror') {
+							$('#main').html('Requested JSON parse failed.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						} else if (exception === 'timeout') {
+							$('#main').html('Time out error.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						} else if (exception === 'abort') {
+							$('#main').html('Ajax request aborted.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						} else {
+							$('#main').html('Uncaught Error.\n' + jqXHR.responseText + '<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 99999999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
+						}
+						*/
+					},
+					//error : function (request, status, error) {
+					//	alert(request.responseText);
+					//}
+			});
 		
 			setTimeout(function(){
 				$(".mypreload").html("");
