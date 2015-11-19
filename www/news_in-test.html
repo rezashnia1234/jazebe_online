@@ -88,7 +88,7 @@
 				return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 			}
 			var id	=	getParameterByName("id");
-
+/*
 			$.ajax({
 					url: "http://dlsmgroup.ir/jazebe_huseini/news/report.php?id=" + id,
 					type: "POST",
@@ -99,6 +99,7 @@
 					success : function(text)
 					{
 						$('#main').html(text);
+*/
 						setTimeout(function(){
 							$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
 							//$(".akhbar_title").width($(window).width()-115-40);
@@ -108,6 +109,7 @@
 								$('#main').simplebar({ autoHide: false });
 							}, 300);
 						}, 100);
+/*
 					},
 					error: function(jqXHR, exception) {
 						$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');				
@@ -120,29 +122,13 @@
 								$('#main').simplebar({ autoHide: false });
 							}, 300);
 						}, 100);
-						/*
-						if (jqXHR.status === 0) {
-							$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (jqXHR.status == 404) {
-							$('#main').html('صفحه مورد نظر شما یافت نشد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (jqXHR.status == 500) {
-							$('#main').html('Internal Server Error [500].<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (exception === 'parsererror') {
-							$('#main').html('Requested JSON parse failed.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (exception === 'timeout') {
-							$('#main').html('Time out error.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (exception === 'abort') {
-							$('#main').html('Ajax request aborted.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else {
-							$('#main').html('Uncaught Error.\n' + jqXHR.responseText + '<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						}
-						*/
+
 					},
 					//error : function (request, status, error) {
 					//	alert(request.responseText);
 					//}
 			});
-		
+*/
 			setTimeout(function(){
 				//$(".mypreload").html("");
 				//$('#main').addClass("simplebar");
@@ -157,6 +143,7 @@
 		
 		
 <style>
+
 .akhbar_header {
   min-height: 60px;
   width: 100%;
@@ -176,6 +163,7 @@
   line-height: 180%;
   text-align: justify;
 }
+
 
 </style>
 <!--footer-bg-center.png-->
@@ -202,6 +190,15 @@
 			</div>
 			<div id="container" >
 				<div id="main" >
+
+<div class="akhbar_header">
+	<p class="akhbar_title">بسم الله الرحمن الرحیم</p>
+</div>
+<span class="date_text">1394/08/28<br/>10:07</span>
+
+<div class="justify doa_text">
+بسم الله الرحمن الرحیم 2 بسم الله الرحمن الرحیم 2<br>
+</div>
 
 			
 				</div>

@@ -27,7 +27,10 @@
 			
 			//onDeviceReady();
 		}
-
+		function show_id(id)
+		{
+			window.location.href = "news_in.html?id=" + id;
+		}
 		function onDeviceReady() {
 
 			//FastClick.attach(document.getElementById('container'));
@@ -49,7 +52,7 @@
 		
 		$(window).load(function() {
 			//$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
-			//$(".akhbar_title").width($(window).width()-115-40);
+			//$(".akhbarha li a").width($(window).width()-115);
 		});
 		$(document).ready(function() {
 			$('.translate').on('click', function() {
@@ -81,16 +84,9 @@
 				//alert("2");
 			});
 */
-			function getParameterByName(name) {
-				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-					results = regex.exec(location.search);
-				return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-			}
-			var id	=	getParameterByName("id");
-
+/*
 			$.ajax({
-					url: "http://dlsmgroup.ir/jazebe_huseini/news/report.php?id=" + id,
+					url: "http://dlsmgroup.ir/jazebe_huseini/news/report.php",
 					type: "POST",
 					data: {
 						testdata: "786"
@@ -98,16 +94,25 @@
 					async: true,
 					success : function(text)
 					{
-						$('#main').html(text);
+						$('.akhbarha').html(text);
+*/
+						max_width = 0;
+						
+						$('.time').each( function(i) {
+							if(max_width<$(this).width())
+								max_width = $(this).width();
+						});
+						
 						setTimeout(function(){
 							$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
-							//$(".akhbar_title").width($(window).width()-115-40);
+							$(".akhbarha li div").width($(window).width()-max_width-30);
 							setTimeout(function(){						
 								$(".mypreload").html("");
 								$('#main').addClass("simplebar");
 								$('#main').simplebar({ autoHide: false });
 							}, 300);
 						}, 100);
+/*
 					},
 					error: function(jqXHR, exception) {
 						$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');				
@@ -120,29 +125,12 @@
 								$('#main').simplebar({ autoHide: false });
 							}, 300);
 						}, 100);
-						/*
-						if (jqXHR.status === 0) {
-							$('#main').html('در اتصال شما به اینترنت مشکلی به وجود آمده است ، امکان نمایش محتوا وجود ندارد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (jqXHR.status == 404) {
-							$('#main').html('صفحه مورد نظر شما یافت نشد<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (jqXHR.status == 500) {
-							$('#main').html('Internal Server Error [500].<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (exception === 'parsererror') {
-							$('#main').html('Requested JSON parse failed.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (exception === 'timeout') {
-							$('#main').html('Time out error.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else if (exception === 'abort') {
-							$('#main').html('Ajax request aborted.<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						} else {
-							$('#main').html('Uncaught Error.\n' + jqXHR.responseText + '<a onclick="go_back();" style="position: fixed; color: white; text-align: center; box-sizing: padding-box; top: 45%; background-color: black; z-index: 999; width: 100%; left: 0px; padding: 20px 0px;">بازگشت به صفحه قبل</a>');
-						}
-						*/
 					},
 					//error : function (request, status, error) {
 					//	alert(request.responseText);
 					//}
 			});
-		
+*/
 			setTimeout(function(){
 				//$(".mypreload").html("");
 				//$('#main').addClass("simplebar");
@@ -157,24 +145,43 @@
 		
 		
 <style>
-.akhbar_header {
-  min-height: 60px;
+#warper #container #main{
+	padding:0 !important
+}
+.akhbarha {
+    list-style-type: arabic-indic;
+    direction: rtl;
+}
+.akhbarha li {
+  float: right;
+  list-style-type: none;
+  padding-right: 10px;
   width: 100%;
+  box-sizing: border-box;
 }
-
-.date_text{
-	color: #039C84;
-	width: 100%;
-	margin-top: 4px;
-	padding: 0 !important;
-	text-align: right;
+.akhbarha li div {
+	color: black;
+	line-height: 40px;
+	width: 65%;
+	padding-right: 0;
+	float:right;
+	cursor: pointer;
+	display:inline-block;
 }
-.akhbar_title {
-  color: #039c84;
-  direction: rtl;
-  font-weight: bold;
-  line-height: 180%;
-  text-align: justify;
+.akhbarha li:nth-child(2n-1) {
+background:#ededed
+}
+#warper #container #main .simplebar-content{
+	padding:0 !important
+}
+.akhbarha span {
+    color: #039C84;
+    float: left;
+	padding-left: 10px;
+    margin-top: 14px;
+    height: 15px;
+   box-sizing: border-box;
+   display:inline-block;
 }
 
 </style>
@@ -201,19 +208,23 @@
 				</div>
 			</div>
 			<div id="container" >
-				<div id="main" >
+			<div id="main" >
+			
+				<ol class="akhbarha" type="1">
+					<li class="news" onclick="show_id(10);"><div>بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(9);"><div>بسم الله الرحمن الرحیم</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(8);"><div>بسم الله الرحمن الرحیم</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(7);"><div>بسم الله الرحمن الرحیم</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(6);"><div>تست</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(5);"><div>galaxy note 2014 LTE سفید</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(4);"><div>تست</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(3);"><div>تست</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(2);"><div>اگر ما با هم باشیم</div><span class="time">1394/08/28</span></li><li class="news" onclick="show_id(1);"><div>بسم الله الرحمن الرحیم</div><span class="time">1394/08/28</span></li>
+				</ol>
 
 			
-				</div>
+			</div>
 			</div>
 	</div>
-	<div id="controls_size">
-		<div id="css_style"></div>
-		<div id="controls_over"></div>
-		<a href="#" id="large">قلم</a>
-		<a href="#" id="medium">قلم</a>
-		<a href="#" id="small" >قلم</a>
-		<div id="controls_bg"></div>
-	</div>
+			<div id="controls_size">
+				<div id="css_style"></div>
+				<div id="controls_over"></div>
+				<a href="#" id="large">قلم</a>
+				<a href="#" id="medium">قلم</a>
+				<a href="#" id="small" >قلم</a>
+				<div id="controls_bg"></div>
+			</div>
 </body>
 </html>

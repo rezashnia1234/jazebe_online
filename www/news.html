@@ -110,14 +110,14 @@
 						
 						max_width = 0;
 						
-						$('.news').each( function(i) {
+						$('.time').each( function(i) {
 							if(max_width<$(this).width())
 								max_width = $(this).width();
 						});
 						
 						setTimeout(function(){
 							$("#main").height($(window).height() - $("#header").height() - $("#footer").height()-30);
-							$(".akhbarha li").width($(window).width()-max_width-15);
+							$(".akhbarha li div").width($(window).width()-max_width-25);
 							setTimeout(function(){						
 								$(".mypreload").html("");
 								$('#main').addClass("simplebar");
@@ -185,14 +185,16 @@
   list-style-type: none;
   padding-right: 10px;
   width: 100%;
+  box-sizing: border-box;
 }
-.akhbarha li a {
-  color: black;
-  line-height: 40px;
+.akhbarha li div {
+	color: black;
+	line-height: 40px;
 	width: 65%;
-  padding-right: 0;
-  float:right;
-      cursor: pointer;
+	padding-right: 0;
+	float:right;
+	cursor: pointer;
+	display:inline-block;
 }
 .akhbarha li:nth-child(2n-1) {
 background:#ededed
@@ -200,39 +202,15 @@ background:#ededed
 #warper #container #main .simplebar-content{
 	padding:0 !important
 }
-
-
-
-
-span.time {
-    border-left: 1px solid #039C84;
-    left: 31px;
-
-}
-
-span.date {
-    	padding-right: 10px;
-
-
-}
-
-
 .akhbarha span {
     color: #039C84;
     float: left;
-    width: 45px;
+	padding-left: 3px;
     margin-top: 14px;
     height: 15px;
+   box-sizing: border-box;
+   display:inline-block;
 }
-span.date_numb {
-    width: 15px;
-    padding-right: 5px;
-}
-span.date_text {
-    padding: 0 !important;
-    width: 35px;
-}
-
 </style>
 <!--footer-bg-center.png-->
 </head>
