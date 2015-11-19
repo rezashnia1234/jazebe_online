@@ -169,6 +169,16 @@
 		function onDeviceReady() {
 			window.localStorage.setItem('offline','yes');
 			
+			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				navigator.share("text","title","mimetype");
+				
+				
+				
+				
+				
+			}
+			
+			
 			if(window.sessionStorage.getItem('session_rand') == null)
 			{
 				playAudioBackground("audio/besmella.mp3");
