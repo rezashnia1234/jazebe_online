@@ -32,28 +32,34 @@
 		my_location_marker_friend = L.marker([36.2879,59.6157], {icon: user_location_icon_friend,zIndexOffset: 998}).addTo(map);
 		my_location_marker_friend.bindPopup("موقعیت دوست شما");
 	}
+	
+	
+	
+	
+function onError(error) { 
+	// your callback here
+	alert(JSON.stringify(error));
+}
+function onSuccess2(position) {
+	alert("longitude : " + position.coords.longitude);
+}
+
 
 	function onDeviceReady() {
 		//FastClick.attach(document.body);
 		FastClick.attach(document.getElementById('button'));
-/*
-		(function(){
-			navigator.geolocation.getCurrentPosition(onSuccess, onError);
-			setTimeout(arguments.callee, 5000);
-		})();
-*/
-		my_location_gps = navigator.geolocation.watchPosition(onSuccess,onError);
+(function(){
+	navigator.geolocation.getCurrentPosition(onSuccess2, onError);
+	setTimeout(arguments.callee, 5000);
+})();
+
 	}
-	$(window).unload(function(){
-		//my_location_gps
-		navigator.geolocation.clearWatch(my_location_gps);
-		alert();
-	});
-	/*
-	window.onbeforeunload = function() {
-		return "Bye now!";
-	};
-	*/
+
+	
+	
+	
+	
+	
 	function add_to_favorites_open() {
 		if(add_to_favorites_popup==false)
 		{
@@ -229,11 +235,7 @@
 		//test = L.marker([32.6072,44.0264], {icon: transport_icon}).bindPopup('test').addTo(map);
 		//test.setLatLng([32.5986,44.0156]);
 	}
-	
-	function onError(error) { 
-		// your callback here
-		alert(JSON.stringify(error));
-	}
+
 /**/
 </script>
 

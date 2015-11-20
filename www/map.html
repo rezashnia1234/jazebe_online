@@ -27,13 +27,7 @@
 			
 			//onDeviceReady();
 		}
-function onError(error) { 
-	// your callback here
-	alert(JSON.stringify(error));
-}
-function onSuccess(position) {
-	alert("longitude : " + position.coords.longitude);
-}
+
 		function onDeviceReady() {
 
 			//FastClick.attach(document.getElementById('container'));
@@ -43,11 +37,6 @@ function onSuccess(position) {
 				document.addEventListener("backbutton", go_back_to_dar_safar, false);
 			}
 		
-(function(){
-	navigator.geolocation.getCurrentPosition(onSuccess, onError);
-	setTimeout(arguments.callee, 5000);
-})();
-//navigator.geolocation.getCurrentPosition(onSuccess, onError);
 		}
 		function uniqueDeviceIDsuccess_index(uuid)
 		{
