@@ -267,6 +267,7 @@ function onSuccess2(position) {
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 // START Map :////////////////////////////////////////////////////////////////
+
 	var icon_style = L.Icon.extend({
 		options: {
 			iconSize:     [33, 44], // size of the icon
@@ -290,7 +291,8 @@ function onSuccess2(position) {
 			popupAnchor:  [0, -59] // point from which the popup should open relative to the iconAnchor
 		}
 	});
-	    
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	var ziyarati_icon		= new icon_style({iconUrl: 'maps/map-icon/zearati.png',iconRetinaUrl: 'maps/map-icon/zearati@2x.png',});
 	var bimarestan_icon		= new icon_style({iconUrl: 'maps/map-icon/hospetal.png',iconRetinaUrl: 'maps/map-icon/hospetal@2x.png',});
 	var darmani_icon		= new icon_style({iconUrl: 'maps/map-icon/darmangah.png',iconRetinaUrl: 'maps/map-icon/darmangah@2x.png',});
@@ -306,9 +308,10 @@ function onSuccess2(position) {
 	var wifi_icon			= new icon_style({iconUrl: 'maps/map-icon/wifi.png',iconRetinaUrl: 'maps/map-icon/wifi@2x.png',});
 	var console_icon		= new icon_style({iconUrl: 'maps/map-icon/konsulgari.png',iconRetinaUrl: 'maps/map-icon/konsulgari@2x.png',});
 	var edari_icon			= new icon_style({iconUrl: 'maps/map-icon/edari.png',iconRetinaUrl: 'maps/map-icon/edari@2x.png',});
+	*/
 	var	user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
 	var	user_location_icon_friend	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location_friend.png',iconRetinaUrl: 'maps/map-icon/user_location_friend@2x.png',});
-
+/*
 	var ziyarati	= new L.LayerGroup();
 	var bimarestan	= new L.LayerGroup();
 	var darmani		= new L.LayerGroup();
@@ -444,6 +447,7 @@ L.marker([32.52648538,44.11361659], {icon: mukeb_icon}).bindPopup('موکب خد
 L.marker([32.53638261,44.10289987], {icon: mukeb_icon}).bindPopup('موکب رضوان').addTo(mukeb_irani); //1162
 L.marker([32.56815115,44.0544717], {icon: mukeb_icon}).bindPopup('').addTo(mukeb_irani); //1293
 */
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 L.marker([32.09553636,44.32264229], {icon: mukeb_icon}).bindPopup('مختار ثقفی ').addTo(mukeb_irani);
@@ -587,6 +591,7 @@ L.marker([32.60985803,44.03081814], {icon: lost_icon}).bindPopup('هتل ضیو�
 ////////////////////////////////////////////////////////////////////////////////////////////////		
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //NAJAF HOTEL///////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 L.marker([31.99494079,44.31933967], {icon: hotel_icon}).bindPopup('67').addTo(hotel);
@@ -958,8 +963,7 @@ L.marker([32.6104754,44.03110044], {icon: hotel_icon}).bindPopup('Zoyoof Rahman'
 		
 		
 		
-		
-		
+ 		
 /*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////
 //////favorite////////////////////////////////////
