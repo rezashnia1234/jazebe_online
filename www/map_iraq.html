@@ -41,19 +41,7 @@
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			setTimeout(arguments.callee, 5000);
 		})();
-		
-		my_location_gps = navigator.geolocation.watchPosition(onSuccess,onError);
 	}
-	$(window).unload(function(){
-		//my_location_gps
-		navigator.geolocation.clearWatch(my_location_gps);
-		alert();
-	});
-	/*
-	window.onbeforeunload = function() {
-		return "Bye now!";
-	};
-	*/
 	function add_to_favorites_open() {
 		if(add_to_favorites_popup==false)
 		{
@@ -98,10 +86,11 @@
 //////share location//////////////////////////////
 	function share_location() {
 		navigator.notification.confirm(
-			'لطفا گزینه مورد نظر را انتخاب نمایید', // message
+			//'لطفا گزینه مورد نظر را انتخاب نمایید', // message
+			'لطفا گزینه مورد نظر را انتخاب نمایید:\n مرحله 1: میخواهم موقعیت خود را ارسال کنم \n مرحله 2: دوستم موقعیت خود را برای من ارسال کرده است', // message
 			 onConfirm,            // callback to invoke with index of button pressed
 			'اشتراک گذاری موقعیت',           // title
-			['میخواهم موقعیت خود را ارسال کنم','دوستم موقعیت خود را برای من ارسال کرده است','لغو درخواست']         // buttonLabels
+			['مرحله یک','مرحله دو','لغو درخواست']         // buttonLabels
 		);
 	}
 	function onConfirm(buttonIndex) {
@@ -232,7 +221,7 @@
 	
 	function onError(error) { 
 		// your callback here
-		alert(JSON.stringify(error));
+		//alert(JSON.stringify(error));
 	}
 /**/
 </script>
