@@ -576,7 +576,8 @@ ul.big_list li.need_download {
 	function PausePlayAudio() {
 		if (audio) {
 			audio.pause();
-			audio.seekTo(pausePos*1000);
+			audio.seekTo(slider_Timer.val()*1000);
+			//audio.seekTo(pausePos*1000);
 			audio.play();
 		}
 	}
