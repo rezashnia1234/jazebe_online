@@ -97,9 +97,11 @@
 		if(buttonIndex==1)
 		{//send
 			//alert("sms:?body=" + my_location_marker.getLatLng());
+			//sms:+19725551212?body=hello	android
 			if(my_location_marker.getLatLng().lat != 36.2879)
 			{
-				window.location.href = "sms:&body=" + my_location_marker.getLatLng();
+				//window.location.href = "sms:&body=" + my_location_marker.getLatLng();
+				window.location.href = "sms:?body=" + my_location_marker.getLatLng();
 			}
 			else
 			{
