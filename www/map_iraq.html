@@ -36,12 +36,12 @@
 	function onDeviceReady() {
 		//FastClick.attach(document.body);
 		FastClick.attach(document.getElementById('button'));
-		
+/*
 		(function(){
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			setTimeout(arguments.callee, 5000);
 		})();
-		
+*/
 		my_location_gps = navigator.geolocation.watchPosition(onSuccess,onError);
 	}
 	$(window).unload(function(){
