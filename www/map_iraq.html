@@ -111,63 +111,14 @@ function onSuccess2(position) {
 		}
 	});
 	    
-	var ziyarati_icon		= new icon_style({iconUrl: 'maps/map-icon/zearati.png',iconRetinaUrl: 'maps/map-icon/zearati@2x.png',});
-	var bimarestan_icon		= new icon_style({iconUrl: 'maps/map-icon/hospetal.png',iconRetinaUrl: 'maps/map-icon/hospetal@2x.png',});
-	var darmani_icon		= new icon_style({iconUrl: 'maps/map-icon/darmangah.png',iconRetinaUrl: 'maps/map-icon/darmangah@2x.png',});
-	var mukeb_icon			= new icon_style({iconUrl: 'maps/map-icon/mukeb.png',iconRetinaUrl: 'maps/map-icon/mukeb@2x.png',});
-	var mukeb_irani_icon	= new icon_style({iconUrl: 'maps/map-icon/mukeb-iran.png',iconRetinaUrl: 'maps/map-icon/mukeb-iran@2x.png',});
-	var bazresi_icon		= new icon_style({iconUrl: 'maps/map-icon/stop.png',iconRetinaUrl: 'maps/map-icon/stop@2x.png',});
-	var amud_icon			= new icon_style({iconUrl: 'maps/map-icon/mil.png',iconRetinaUrl: 'maps/map-icon/mil@2x.png',});
-	var transport_icon		= new icon_style({iconUrl: 'maps/map-icon/hamlonaghl.png',iconRetinaUrl: 'maps/map-icon/hamlonaghl@2x.png',});
-	var airport_icon		= new icon_style({iconUrl: 'maps/map-icon/airport.png',iconRetinaUrl: 'maps/map-icon/airport@2x.png',});
-	var favorites_icon		= new icon_style({iconUrl: 'maps/map-icon/fav.png',iconRetinaUrl: 'maps/map-icon/fav@2x.png',});
-	var lost_icon			= new icon_style({iconUrl: 'maps/map-icon/gomshodeghan.png',iconRetinaUrl: 'maps/map-icon/gomshodeghan@2x.png',});
-	var hotel_icon			= new icon_style({iconUrl: 'maps/map-icon/hotel.png',iconRetinaUrl: 'maps/map-icon/hotel@2x.png',});
-	var wifi_icon			= new icon_style({iconUrl: 'maps/map-icon/wifi.png',iconRetinaUrl: 'maps/map-icon/wifi@2x.png',});
-	var console_icon		= new icon_style({iconUrl: 'maps/map-icon/konsulgari.png',iconRetinaUrl: 'maps/map-icon/konsulgari@2x.png',});
-	var edari_icon			= new icon_style({iconUrl: 'maps/map-icon/edari.png',iconRetinaUrl: 'maps/map-icon/edari@2x.png',});
 	var	user_location_icon	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
 	var	user_location_icon_friend	= new icon_style_user_location({iconUrl: 'maps/map-icon/user_location_friend.png',iconRetinaUrl: 'maps/map-icon/user_location_friend@2x.png',});
 
-	var ziyarati	= new L.LayerGroup();
-	var bimarestan	= new L.LayerGroup();
-	var darmani		= new L.LayerGroup();
-	var mukeb		= new L.LayerGroup();
-	var mukeb_irani	= new L.LayerGroup();
-	var bazresi		= new L.LayerGroup();
-	var amud		= new L.LayerGroup();
-	var transport	= new L.LayerGroup();
-	var favorites	= new L.LayerGroup();
-	var lost		= new L.LayerGroup();
-	var console		= new L.LayerGroup();
-	var edari		= new L.LayerGroup();
-	var hotel		= new L.LayerGroup();
-	var wifi		= new L.LayerGroup();
 
 		
 		
 	
-//////////////////////////////////////////////////
-//////favorite////////////////////////////////////
-	if(window.localStorage.getItem('favorites_lat') == null)
-	{
-		window.localStorage.setItem('favorites_lat',JSON.stringify([""]));
-		window.localStorage.setItem('favorites_long',JSON.stringify([""]));
-		window.localStorage.setItem('favorites_title',JSON.stringify([""]));
-	}
-	else
-	{
-		temp_array_lat	 = JSON.parse(window.localStorage.getItem('favorites_lat'));
-		temp_array_long	 = JSON.parse(window.localStorage.getItem('favorites_long'));
-		temp_array_title = JSON.parse(window.localStorage.getItem('favorites_title'));
-		$.each(temp_array_lat, function(i, val) {
-			//alert(i + ":" + val);
-			//alert(temp_array_long[i]);
-			L.marker([temp_array_lat[i],temp_array_long[i]], {icon: favorites_icon}).bindPopup(temp_array_title[i]).addTo(favorites);
-		});
-	}
-//////favorite////////////////////////////////////
-//////////////////////////////////////////////////
+
 
 	var map = L.map('map', {
 		center: [32.1210,44.3257],
@@ -205,24 +156,9 @@ function onSuccess2(position) {
 
 	var baseLayers = {};
 
-	var overlays = {
-		"نقاط مورد علاقه": favorites,
-		"مکان های زیارتی": ziyarati,
-		//"بیمارستان ها": bimarestan,
-		"مراکز درمانی": darmani,
-		//"موکب ، حسینیه": mukeb,//0000000000000000000000000000000000000000
-		"موکب های در اختیار ایرانی ها": mukeb_irani,
-		"ایست و بازرسی": bazresi,
-		"هتل ها": hotel,
-		"عمود ها": amud,
-		"حمل و نقل": transport,
-		"محل های گمشدگان":lost,
-		"کنسولگری":console,
-		"خدمات اداری به زائرین":edari,
-		"wifi":wifi,
-	};
 
-	L.control.layers(baseLayers, overlays).addTo(map);
+
+	//L.control.layers(baseLayers, overlays).addTo(map);
 
 	/*
 	function onLocationFound(e) {
