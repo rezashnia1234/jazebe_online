@@ -450,6 +450,7 @@ ul.big_list li.need_download {
 			temp_pausePos = pausePos;
 			pauseAudio();
 			formatTime(pausePos,audio_Timer);
+			audio.seekTo(pausePos*1000);
 			
 			setTimeout(function(){
 				pausePos = temp_pausePos;
