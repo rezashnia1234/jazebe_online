@@ -452,9 +452,11 @@ ul.big_list li.need_download {
 			formatTime(pausePos,audio_Timer);
 			
 			setTimeout(function(){
+			
 				pausePos = temp_pausePos;
+				formatTime(pausePos,audio_Timer);
 				slider_Timer.val(pausePos);
-			}, 300);
+			}, 800);
 		});
 		
 		pause_btn.click(function(){	
