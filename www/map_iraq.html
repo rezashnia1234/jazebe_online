@@ -20,6 +20,7 @@
 </style>
 
 <script>
+	var my_location_gps;
 	function init() {		
 		//console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start init()');
 		document.addEventListener("deviceready", onDeviceReady, false);
@@ -40,7 +41,19 @@
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
 			setTimeout(arguments.callee, 5000);
 		})();
+		
+		my_location_gps = navigator.geolocation.watchPosition(onSuccess,onError);
 	}
+	$(window).unload(function(){
+		//my_location_gps
+		navigator.geolocation.clearWatch(my_location_gps);
+		alert();
+	});
+	/*
+	window.onbeforeunload = function() {
+		return "Bye now!";
+	};
+	*/
 	function add_to_favorites_open() {
 		if(add_to_favorites_popup==false)
 		{
@@ -218,7 +231,7 @@
 	}
 	
 	function onError(error) { 
-		// your callback here 
+		// your callback here
 		alert(JSON.stringify(error));
 	}
 /**/

@@ -36,10 +36,10 @@
 		//FastClick.attach(document.body);
 		FastClick.attach(document.getElementById('button'));
 		
-		//(function(){
+		(function(){
 			navigator.geolocation.getCurrentPosition(onSuccess, onError);
-		//	setTimeout(arguments.callee, 5000);
-		//})();
+			setTimeout(arguments.callee, 5000);
+		})();
 	}
 	function add_to_favorites_open() {
 		if(add_to_favorites_popup==false)
@@ -218,7 +218,7 @@
 	}
 	
 	function onError(error) { 
-		alert(JSON.stringify(error));
+		//alert(JSON.stringify(error));
 	}
 /**/
 </script>
