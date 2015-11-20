@@ -445,10 +445,16 @@ ul.big_list li.need_download {
 			//pause_btn.prop("disabled",true);
 			play2_btn.css("display","block");
 			pause_btn.css("display","none");
-			
+			var temp_pausePos;
 			pausePos = slider_Timer.val();
-			formatTime(pausePos,audio_Timer);
+			temp_pausePos = pausePos;
 			pauseAudio();
+			formatTime(pausePos,audio_Timer);
+			
+			setTimeout(function(){
+				pausePos = temp_pausePos;
+				slider_Timer.val(pausePos);
+			}, 300);
 		});
 		
 		pause_btn.click(function(){	
@@ -576,8 +582,8 @@ ul.big_list li.need_download {
 	function PausePlayAudio() {
 		if (audio) {
 			audio.pause();
-			audio.seekTo(slider_Timer.val()*1000);
-			//audio.seekTo(pausePos*1000);
+			//audio.seekTo(slider_Timer.val()*1000);
+			audio.seekTo(pausePos*1000);
 			audio.play();
 		}
 	}
