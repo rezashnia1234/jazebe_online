@@ -70,6 +70,7 @@
 			else
 			{
 				temp_array_location = JSON.parse(window.localStorage.getItem("location_history"));
+				temp_array_location = temp_array_location.filter(function(v){return v!==''});
 				if (temp_array_location.length === 0) {
 					$("ol.number").prepend('<li style="text-align:center;">هنوز هیچ موردی ثبت نشده است</li>');
 				}
