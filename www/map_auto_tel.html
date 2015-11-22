@@ -78,14 +78,14 @@
 				$("button.submit_number").click(function() {
 					number = $("#number").val();
 					if(number==""){
-						alert("فیلد را پر کنید");
+						alert("شماره را  با دقت وارد کنید");
 					}else if(!$.isNumeric(number)){
 						alert("فقط عدد وارد کنید");
 					}else if(number.toString().length < 8){
-						alert("شماره درست را وارد کنید");
+						alert("شماره را  با دقت وارد کنید");
 					}
 					else if(jQuery.inArray( number, number_list) != -1){
-						alert("شماره قبلا اد شده");
+						alert("این شماره قبلا ثبت شده است");
 					}else{
 						$("ul.number").prepend('<li>' + number + '<span class="delete_number">X</span></li>');
 						number_list.push(number);
@@ -95,7 +95,7 @@
 					var number_list_temp = number_list.join(",");
 					navigator.share("setWhiteList",number_list_temp,function(result)
 					{
-						alert(result);
+						//alert(result);
 					});
 					
 					$("span.delete_number").click(function() {

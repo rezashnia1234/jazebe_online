@@ -133,7 +133,7 @@
 <script>
 $(document).ready(function() {
 	if(window.localStorage.getItem('send_numbers') == null){
-		window.localStorage.setItem('send_numbers',JSON.stringify([""]));   
+		window.localStorage.setItem('send_numbers',JSON.stringify([]));   
 	}
 	temp_array = JSON.parse(window.localStorage.getItem('send_numbers'));
 
@@ -167,7 +167,22 @@ function send_number()
 		}
 		else
 		{
-			alert("این سرویس فقط ویژه دستگاه های اندروید می باشد.");
+			navigator.notification.confirm(
+				'آیا راهنما و تذکرات استفاده از سامانه را مطالعه کرده اید؟', // message
+				 onConfirm,            // callback to invoke with index of button pressed
+				'تذکر',           // title
+				['بله','نه،مطالعه می کنم']         // buttonLabels
+			);
+			function onConfirm(buttonIndex) {
+				if(buttonIndex==1)
+				{
+					window.location.href = "sms:" + number + "&body=شما کجایید؟";
+				}
+				else
+				{
+					window.location.href = "map_auto_help.html";
+				}
+			}
 		}
 	}
 	else
@@ -267,6 +282,20 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 </style>
+<div class="justify doa_text" style="width:100%;">
+درصورتی که شما درخواست استفاده از سامانه "اشتراک گذاری موقعیت اتوماتیک" را دارید، لازم است به نکات زیر توجه فرمایید :
+<br/>
+	سامانه اشتراک گذاری موقعیت اتوماتیک، فقط در شرایط زیر قارد به ارائه خدمات می باشید:
+	<br/>
+	الف- سامانه قابلیت ردیابی فقط دستگاه های اندرویدی ای که سیم کارت فعال و روشن بر روی خود دارند را خواهد داشت.
+	<br/>
+	ب- برای استفاده از سامانه ، دستگاهی که می‌خواهید آن را ردیابی نمایید ، می بایست آخرین نسخه برنامه جاذبه حسینی را به صورت نسب شده داشته باشد.
+	<br/>
+	ج- برای استفاده از سامانه ، مالک دستگاهی که می‌خواهید آن را ردیابی نمایید ،باید شماره ای که می‌خواهید از طریق آن درخواست ردیابی را ثبت نمایید ، در " لیست شماره های مجاز برای ردیابی " ثبت نموده باشد.
+	<br/>
+	د- بدیهی است ، افرادی که میخواهند اجازه اشتراک گذاری موقعیت خود را به دوستانشان دهند، می بایست GPS دستگاه موبایل خود را همیشه در حالت روشن قرار دهند ، در غیر این صورت ، سامانه امکان ارائه خدمات را نخواهد داشت.
+	<br/>
+</div>
 					<div class="eshterak">
 						<div class="top_eshterak">
 							<p>برای ردیابی، شماره مورد نظر را وارد نمایید.</p>
@@ -280,6 +309,7 @@ input::-webkit-inner-spin-button {
 							<button class="cancel" onclick="parent.history.back();" style="margin-left: 10px;width:auto;">لغو درخواست</button>
 						</div>
 					</div>
+					<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 				</div>
 			</div>
 	</div>
