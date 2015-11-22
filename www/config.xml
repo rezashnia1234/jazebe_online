@@ -62,6 +62,7 @@
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 
 	
+	<gap:plugin name="ir.smgroup.smslocationnotifier" platform="android" />	
 	
 	<!--<gap:plugin name="ir.smgroup.smslocationnotifier" />-->
     <!-- Third party plugins -->

@@ -36,6 +36,10 @@
 			if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
 				document.addEventListener("backbutton", go_back_to_dar_safar, false);
 			}
+
+			if ( device.platform == 'iOS' ){//Android,iOS,win7=WinCE,win8=Win32NT
+				$(".android").css("display","none");
+			}
 		
 		}
 		function uniqueDeviceIDsuccess_index(uuid)
@@ -144,12 +148,10 @@
 			<div id="main" >
 			
 				<ul class="zirmenu">
-					<li><a href="map_help.html">راهنمای اشتراک گذاری موقعیت</a></li>
-					<li><a href="map_auto.html">اشتراک گذاری موقعیت اتوماتیک</a></li>
-					<li></li>
-					<li><a href="map_najaf.html">نقشه نجف</a></li>
-					<li><a href="map_karbala.html">نقشه کربلا</a></li>
-					<li><a href="map_iraq.html">نقشه نجف تا کربلا</a></li>
+					<li><a href="map_auto_help.html">راهنمای اشتراک گذاری موقعیت به صورت اتوماتیک</a></li>
+					<li class="android"><a href="map_auto_tel.html">لیست تلفن های مجاز برای ردیابی</a></li>
+					<li><a href="map_auto_req.html">درخواست ردیابی یک شماره تلفن</a></li>
+					<li><a href="map_auto_his.html">تاریخچه ردیابی های انجام شده</a></li>
 				</ul>
 
 			
