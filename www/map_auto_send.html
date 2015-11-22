@@ -150,7 +150,7 @@ $(document).ready(function() {
 function send_number()
 {
 	var number = $("#autocomplete").val().replace(" ","");
-	if($.isNumeric(number) && number!="" && number!="0" && number.toString().length > 8))
+	if($.isNumeric(number) && number!="" && number!="0" && number.toString().length > 8)
 	{
 		temp_array = JSON.parse(window.localStorage.getItem('send_numbers'));
 		if($.inArray(number,temp_array) == -1)
