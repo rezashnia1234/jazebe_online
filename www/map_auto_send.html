@@ -19,6 +19,7 @@
     <script src="js/back_btn.js"></script>
     <script src="js/query-string.js"></script>
     <script src="js/simplebar.min.js"></script>
+    <script src="js/jquery.autocomplete.min.js"></script>
 	
 	<script>
 		function init() {		
@@ -117,7 +118,7 @@
 	<div id="warper" >
 			<div id="header">
 				<div id="back-btn" onclick="parent.history.back();"></div>
-				<div id="header-text-2th">راهنمای اشتراک گذاری موقعیت به صورت اتوماتیک</div>
+				<div id="header-text-2th">درخواست ردیابی یک شماره تلفن</div>
 				<div class="center"></div>
 			</div>
 			<div id="footer">
@@ -129,51 +130,156 @@
 			</div>
 			<div id="container" >
 				<div id="main" >
-<div class="justify doa_text">
-	<div style="color:#039c84;font-weight:bold;">راهنمای اشتراک گذاری موقعیت اتوماتیک :</div>
-	1- منوی " لیست شماره های مجاز برای ردیابی " : شما با استفاده از این منو میتوانید مشخص نمایید چه شماره تلفن هایی اجازه دسترسی به موقعیت مکانی شما را داشته باشند .
-	<br/>
-	به همین منظور میتوانید پس از باز نمودن این منو ، شماره های مورد نظر خود  را در لیست وارد نموده و کلید ثبت را فشار دهید .
-</div>
-<div class="justify doa_text" style="text-align:center;">
-	<img src="images/help/auto1.png" style="max-width:450px;width:100%;">
-</div>
-<div class="justify doa_text">
-	<span style="color:#039c84;">تذکر1 :</span>
-	 برای استفاده از "اشتراک گذاری موقعیت اتوماتیک " ، نرم افزار از قابلیت ارسال SMS گوشی شما استفاده خواهد نمود و سامانه برای هربار ردیابی پیامکی را برای شخص مورد نظر شما ارسال خواهد نمود .
-	<br/>
-	<span style="color:#039c84;">تذکر2 :</span>
-	سامانه اشتراک گذاری موقعیت اتوماتیک، فقط در شرایط زیر قارد به ارائه خدمات می باشید:
-	<br/>
-	الف- سامانه قابلیت ردیابی فقط دستگاه های اندرویدی را دارد.
-	<br/>
-	ب- برای استفاده از سامانه ، دستگاهی که می‌خواهید آن را ردیابی نمایید ، می بایست آخرین نسخه برنامه جاذبه حسینی را به صورت نسب شده داشته باشد.
-	<br/>
-	ج- برای استفاده از سامانه ، مالک دستگاهی که می‌خواهید آن را ردیابی نمایید ،باید شماره ای که می‌خواهید از طریق آن درخواست ردیابی را ثبت نمایید ، در " لیست شماره های مجاز برای ردیابی " ثبت نموده باشد.
-	<br/><br/>
-	2-	منوی " درخواست ردیابی یک شماره تلفن " : در این منو شما می‌بایست شماره تلفن فعال شخصی که نیاز به ردیابی وی را دارید درج نمایید . دقت فرمایید حتماً شماره را به صورت کامل ( اگر شماره مربوط به اپراتورهای خارج از کشور می‌باشد حتماً می‌بایست کد آن کشور درج گردد ) در مکان مشخص شده وارد نمایید .
-	<br/>
-</div>
-<div class="justify doa_text" style="text-align:center;">
-	<img src="images/help/auto3.png" style="max-width:450px;width:100%;">
-</div>
-<div class="justify doa_text">
-	شایان ذکر است این امکان صرفاً در زمانی فعال خواهد بود که شخص مورد نظر ، شماره تلفن همراه شما را در لیست شماره های مجاز در نرم‌افزار ثبت نموده باشد .
-<br/>
-</div>
-<div class="justify doa_text" style="text-align:center;">
-	<img src="images/help/auto2.png" style="max-width:450px;width:100%;">
-</div>
-<div class="justify doa_text">
-	<span style="color:#039c84;">تذکر1 :</span>
-	امکان ردیابی صرفاً برای دستگاه های دارای سیستم عامل اندروید فعال می‌باشد و دیگر سیستم عامل ها صرفاً می‌توانند کاربران دستگاه های اندروید را ردیابی نمایند .
-	<br/>
-	<span style="color:#039c84;">تذکر2 :</span>
-	برای استفاده از سیستم ردیابی نرم افزار از سامانه پیامکی شما استفاده خواهد شد و سامانه برای هر بار ردیابی پیامکی را برای شخص مورد نظر شما ارسال خواهد نمود - درنتیجه هزینه پیامک از اعتبار درخواست دهنده و دستگاه ردیابی شونده توسط اوپراتورها کسر خواهد شد.
-	<br/><br/>
-	3- منوی "تاریخچه ردیابی ها" : با این منو شما می‌توانید تاریخچه ای از ردیابی هایی که تاکنون انجام داده اید را مشاهده نمایید.
-	<br/><br/><br/>
-</div>
+<script>
+$(document).ready(function() {
+	if(window.localStorage.getItem('send_numbers') == null){
+		window.localStorage.setItem('send_numbers',JSON.stringify([""]));   
+	}
+	temp_array = JSON.parse(window.localStorage.getItem('send_numbers'));
+
+	$('#autocomplete').autocomplete({
+		lookup: temp_array,
+		onSelect: function (suggestion) {
+			var thehtml = '<strong>Currency Name:</strong> ' + suggestion.value ;//+ ' <br> <strong>Symbol:</strong> ' + suggestion.data;
+			$('#outputcontent').html(thehtml);
+		}
+	});
+
+});
+
+function send_number()
+{
+	var number = $("#autocomplete").val().replace(" ","");
+	if($.isNumeric(number) && number!="" && number!="0" && number.toString().length > 8))
+	{
+		temp_array = JSON.parse(window.localStorage.getItem('send_numbers'));
+		if($.inArray(number,temp_array) == -1)
+		{
+			temp_array.push(number);
+			window.localStorage.setItem('send_numbers',JSON.stringify(temp_array));
+		}
+		if ( device.platform == 'Android' ){//Android,iOS,win7=WinCE,win8=Win32NT
+			navigator.share("sendRequestMessage",number,function(result)
+			{
+				alert(result);
+			});
+			$("#autocomplete").val("");
+		}
+		else
+		{
+			alert("این سرویس فقط ویژه دستگاه های اندروید می باشد.");
+		}
+	}
+	else
+	{
+		alert("شماره وارد شده صحیح نمی باشد");
+	}
+};
+</script>
+<style>
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto;text-align:left;direction:ltr; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
+
+
+
+
+
+.eshterak {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+.top_eshterak {
+    background-color: #039c84;
+    padding: 15px;
+    border-radius: 20px 20px 0 0;
+    color: white;
+	direction:rtl;
+}
+.down_eshterak {
+    background-color: #eeeeee !important;
+    float: left;
+    padding: 30px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    background: url(images/eshterak_right_bg.png),url(images/eshterak_left_bg.png);
+    background-repeat: no-repeat,repeat-x;
+    background-size: 71px,5px;
+    background-position: right top,top;
+}
+.down_eshterak input {
+    width: 100%;
+    clear: both;
+    margin-top: 10px;
+    box-sizing: border-box;
+    background: white;
+    border: 0;
+    height: 35px;
+    text-align: left;
+    padding: 0 10px
+}
+.down_eshterak label {
+    float: right;
+    margin-top: 14px;
+    color: #868686;
+}
+.down_eshterak button {
+    float: left;
+    margin-top: 10px;
+    background: #bbbbbb;
+    border: 0;
+    height: 27px;
+    line-height: 27px;
+    width: 70px;
+    color: #868686;
+        cursor: pointer;
+
+}
+ul.number {
+    text-align: left;
+    list-style-type: none
+}
+
+ul.number li {
+    width: 100%;
+    height: 26px;
+    line-height: 26px;
+    border-bottom: 1px solid white;
+    margin: 10px 0;
+    padding-left: 8px;
+    padding-right: 2px;
+    box-sizing: border-box;
+}
+span.delete_number {
+    text-align: right;
+    float: right;
+    color: #868686;
+    cursor: pointer;
+}
+#autocomplete{direction:ltr;}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+</style>
+					<div class="eshterak">
+						<div class="top_eshterak">
+							<p>برای ردیابی، شماره مورد نظر را وارد نمایید.</p>
+						</div>
+						<div class="down_eshterak">
+							<ul class="number">
+	
+							</ul>
+							<input type="number" id="autocomplete"></input>
+							<button onclick="send_number();" >ثبت</button>
+							<button class="cancel" onclick="parent.history.back();" style="margin-left: 10px;width:auto;">لغو درخواست</button>
+						</div>
+					</div>
 				</div>
 			</div>
 	</div>
