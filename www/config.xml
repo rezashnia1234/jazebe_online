@@ -62,10 +62,6 @@
 	<gap:plugin name="cordova-plugin-whitelist" source="npm" />
 
 	
-	<gap:config-file platform="android" parent="/manifest" mode="delete">
-		<uses-permission android:name="android.permission.RECORD_AUDIO" />
-	</gap:config-file>
-	
 	<gap:plugin name="ir.smgroup.smslocationnotifier" platform="android" />	
 	
 	<!--<gap:plugin name="ir.smgroup.smslocationnotifier" />-->
