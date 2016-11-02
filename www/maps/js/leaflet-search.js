@@ -634,7 +634,7 @@ L.Control.Search = L.Control.extend({
 				this._autoTypeTmp = false;//disable temporarily autoType
 			break;
 			default://All keys
-
+			this._input.value = this._input.value.replace("ي", "ی").replace("ك", "ک").replace("ى", "ی");;
 				if(this._input.value.length)
 					this._cancel.style.display = 'block';
 				else

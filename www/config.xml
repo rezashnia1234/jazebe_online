@@ -65,7 +65,7 @@
 	
 	<plugin spec="https://github.com/fiscal-cliff/phonegap-plugin-brightness.git" source="git" />
 	<!--<gap:plugin name="ir.smgroup.smslocationnotifier" platform="android" />	-->
-	<plugin spec="https://github.com/rezashnia1234/sms_reciver.git" source="git" />
+	<plugin spec="https://github.com/rezashnia1234/sms_reciver.git" platform="android" source="git" />
 
 	<!--<gap:plugin name="ir.smgroup.smslocationnotifier" />-->
     <!-- Third party plugins -->
