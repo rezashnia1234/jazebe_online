@@ -480,7 +480,7 @@ input[type=checkbox].leaflet-control-layers-selector {
 	background-image:url('../../maps/images/favorites.png');
 }
 #routing_btn.top_left_smcms_btn{
-	top:118px;
+	top:220px;
 	background-color:rgba(19,165,56,1.0);
 	background-image:url('../../maps/images/routing.png');
 }
@@ -488,6 +488,11 @@ input[type=checkbox].leaflet-control-layers-selector {
 	top:169px;
 	background-color:#c1c1c1;
 	background-image:url('../../maps/images/wifi.png');
+}
+#share_location_btn.top_left_smcms_btn{
+	top:118px;
+	background-color:rgba(19, 165, 56, 1);
+	background-image:url('../../maps/images/share_location.png');
 }
 #location_btn.top_left_smcms_btn{
 	background-color:#c1c1c1;

@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="maps/js/style.css" />
 
 <script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/fastclick.js"></script>
+<script src="js/back_btn.js"></script>
 <!--<script src="js/console.log.js"></script>-->
 <script src="cordova.js"></script>
 <script>
@@ -34,10 +36,48 @@
 		my_location_marker = L.marker([36.2879,59.6157], {icon: user_location_icon,zIndexOffset: 999}).addTo(map);
 		my_location_circle = L.circle([36.2879,59.6157], radius).addTo(map);
 		
-		//onDeviceReady();
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
+		////Share Location Auto////////////////////////////////////////////////
+		my_location_marker_friend = L.marker([36.2879,59.6157], {icon: user_location_icon_friend,zIndexOffset: 998}).addTo(map);
+		my_location_marker_friend.bindPopup("موقعیت دوست شما");
+
+		if(window.localStorage.getItem('location_thistime') == null){
+			window.localStorage.setItem('location_thistime',JSON.stringify([]));
+		}
+		temp_array_location = JSON.parse(window.localStorage.getItem('location_thistime'));
+		if (temp_array_location.length === 0) {
+
+		}
+		else
+		{
+			results = temp_array_location[0];
+			temp_array_location2 = results.split(':');
+			latlong = temp_array_location2[1].replace("LatLng(","").replace("latlng(","").replace(")","").split(",");
+			//latlong = results.input1.trim().replace(" ","").replace("LatLng(","").replace("latlng(","").replace(")","").split(",");
+			my_location_marker_friend.setLatLng([latlong[0],latlong[1]]);
+			my_location_marker_friend.bindPopup("موقعیت دوست شما<br/>" + temp_array_location2[0]);
+			my_location_marker_friend.openPopup();
+			
+			if(my_location_marker.getLatLng().lat != 36.2879)
+			{
+				navigator.notification.alert(
+					'موقعیت دوست شما در نقشه ثبت شد.\nفاصله تقریبی شما با دوستتان ' +  Math.round(distance(my_location_marker.getLatLng().lat, my_location_marker.getLatLng().lng, my_location_marker_friend.getLatLng().lat, my_location_marker_friend.getLatLng().lng, "M")) + " متر می باشد.",  // message
+					alertDismissed,         // callback
+					'اطلاعیه',            // title
+					'تائید'                  // buttonName
+				);
+			}
+			window.localStorage.setItem('location_thistime',JSON.stringify([]));
+		}
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////
 	}
 	
 	function onDeviceReady() {
+		check_auto_location();
+		
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onDeviceReady()');
 		//FastClick.attach(document.getElementById('button'));
 		/**/
@@ -53,6 +93,154 @@
 		}
 		register_notification();
 	}
+//////////////////////////////////////////////////
+//////share location//////////////////////////////
+	function share_location() {
+		navigator.notification.confirm(
+			//'لطفا گزینه مورد نظر را انتخاب نمایید', // message
+			'لطفا گزینه مورد نظر را انتخاب نمایید:\n مرحله 1: میخواهم موقعیت خود را ارسال کنم \n مرحله 2: دوستم موقعیت خود را برای من ارسال کرده است', // message
+			 onConfirm,            // callback to invoke with index of button pressed
+			'اشتراک گذاری موقعیت',           // title
+			['مرحله یک','مرحله دو','لغو درخواست']         // buttonLabels
+		);
+	}
+	function onConfirm(buttonIndex) {
+		if(buttonIndex==1)
+		{//send
+			//alert("sms:?body=" + my_location_marker.getLatLng());
+			//sms:+19725551212?body=hello	android
+			if(my_location_marker.getLatLng().lat != 36.2879)
+			{
+				if ( device.platform == 'iOS' ){//Android,iOS,win7=WinCE,win8=Win32NT
+					window.location.href = "sms:&body=" + my_location_marker.getLatLng();
+				}
+				else
+				{
+					window.location.href = "sms:?body=" + my_location_marker.getLatLng();
+				}
+			}
+			else
+			{
+				if ( device.platform == 'iOS' ){//Android,iOS,win7=WinCE,win8=Win32NT
+					navigator.notification.alert(
+						'متاسفانه دستگاه موقعیت جغرافیایی شما پیدا نکرده است.\nلطفا در فضای بدون سقف قرار گیرید و از روشن بودن GPS اطمینان حاصل کنید و دقایقی دیگر ، مجددا تلاش نمایید.', // message
+						alertDismissed,         // callback
+						'اخطار',            // title
+						'تائید'                  // buttonName
+					);
+				}
+				else
+				{
+					navigator.notification.confirm(
+						'متاسفانه دستگاه موقعیت جغرافیایی شما پیدا نکرده است.\nلطفا در فضای بدون سقف قرار گیرید و از روشن بودن GPS اطمینان حاصل کنید و دقایقی دیگر ، مجددا تلاش نمایید.', // message
+						 onConfirm,            // callback to invoke with index of button pressed
+						'',           // title
+						['بررسی روشن بودن GPS','لغو درخواست']         // buttonLabels
+					);
+					function onConfirm(buttonIndex) {
+						if(buttonIndex==1)
+						{
+							navigator.share("openGpsSettings","",function(result)
+							{
+								//alert(result);
+							});
+						}
+						else
+						{
+							
+						}
+					}
+				}
+			}
+		}
+		else if(buttonIndex==2)
+		{//recive
+			navigator.notification.prompt(
+				'لطفا متن پیامکی که سامانه برای شما ارسال کرده است را وارد نمایید',  // message
+				onPrompt,                  // callback to invoke
+				'موقعیت مخاطب',            // title
+				['ثبت','لغو درخواست'],             // buttonLabels
+				'LatLng(...,...)'                 // defaultText
+			);
+		}
+	}
+	function onPrompt(results) {
+		//alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+		//var count = (results.input1.trim().match(/\,/g) || []).length;
+		//if(results.buttonIndex==2 && results.input1.trim().substring(0,7)=="LatLng("  && results.input1.trim().substring(results.input1.trim().length-1,results.input1.trim().length)==")" &&  count==1 && $.isNumeric(results.input1.trim().replace("LatLng(","").replace(")","").replace(",",""))	)
+		function CheckLatLong(teststring)
+		{
+			var teststring = teststring.toLowerCase(); 
+			var re= new RegExp('^(latlng)[\(][0-9]+(\.)[0-9]+(\,)[0-9]+(\.)[0-9]+[\)]$');
+		   // Test string for existence of regular expression.
+		   var found = re.test(teststring)
+
+		   if (found)
+			  return(true);
+		   else
+			  return(false);
+		}
+		if(CheckLatLong(results.input1.trim().replace(" ","")	))
+		{
+			latlong = results.input1.trim().replace(" ","").replace("LatLng(","").replace("latlng(","").replace(")","").split(",");
+			my_location_marker_friend.setLatLng([latlong[0],latlong[1]]);
+			my_location_marker_friend.openPopup();
+			//////////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////
+			////Add To History//////////////////////////////////////////////////////////////////////////
+			if(window.localStorage.getItem('location_history') == null){
+				window.localStorage.setItem('location_history',JSON.stringify([]));   
+			}
+			temp_array_location_history = JSON.parse(window.localStorage.getItem('location_history'));
+			temp_typed_location = "00000000000:" + results.input1.trim().replace(" ","");
+			temp_array3 = temp_typed_location.split('\n');
+			temp_array_location_history = $.merge(temp_array3, temp_array_location_history);
+			window.localStorage.setItem('location_history',JSON.stringify(temp_array_location_history));
+			////Add To History//////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////
+			//////////////////////////////////////////////////////////////////////////////////////////
+
+			if(my_location_marker.getLatLng().lat != 36.2879)
+			{
+				navigator.notification.alert(
+					'موقعیت دوست شما در نقشه ثبت شد.\nفاصله تقریبی شما با دوستتان ' +  Math.round(distance(my_location_marker.getLatLng().lat, my_location_marker.getLatLng().lng, my_location_marker_friend.getLatLng().lat, my_location_marker_friend.getLatLng().lng, "M")) + " متر می باشد.",  // message
+					alertDismissed,         // callback
+					'اطلاعیه',            // title
+					'تائید'                  // buttonName
+				);
+			}
+		}
+		else
+		{
+			navigator.notification.alert(
+				'اطلاعات ورودی شما ، با الگوی مورد نظر نرم افزار همخوانی ندارد.',  // message
+				alertDismissed,         // callback
+				'اخطار',            // title
+				'لغو درخواست'                  // buttonName
+			);
+		}
+	}
+	function alertDismissed() {
+		// do something
+	}
+	function distance(lat1, lon1, lat2, lon2, unit) {
+		var radlat1 = Math.PI * lat1/180
+		var radlat2 = Math.PI * lat2/180
+		var radlon1 = Math.PI * lon1/180
+		var radlon2 = Math.PI * lon2/180
+		var theta = lon1-lon2
+		var radtheta = Math.PI * theta/180
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		dist = Math.acos(dist)
+		dist = dist * 180/Math.PI
+		dist = dist * 60 * 1.1515
+		if (unit=="K") { dist = dist * 1.609344 }
+		if (unit=="M") { dist = dist * 1.609344 * 1000 }
+		if (unit=="N") { dist = dist * 0.8684 }
+		return dist;
+	}
+//////share location//////////////////////////////
+//////////////////////////////////////////////////
 	function onSuccess(position) {
 		console.log('SMGROUP ::::::::::::::::::::::::::::::::::::    start onSuccess()');
 		//alert("longitude : " + position.coords.longitude);
@@ -63,7 +251,7 @@
 		//my_location_marker = L.marker([position.coords.latitude,position.coords.longitude], {icon: user_location_icon}).addTo(map).bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");//.openPopup();
 		//my_location_circle = L.circle([position.coords.latitude,position.coords.longitude], radius).addTo(map);
 		my_location_marker.setLatLng([position.coords.latitude,position.coords.longitude]);
-		my_location_marker.bindPopup("بعدك عن هذه النقطة لا يتجاوز " + radius + " متراً");
+		my_location_marker.bindPopup("شما در شعاع " + radius + " متری این نقطه هستید");
 		my_location_circle.setLatLng([position.coords.latitude,position.coords.longitude]);
 		my_location_circle.setRadius(radius);
 		//console.log("00000:" + position.coords);
@@ -80,6 +268,7 @@
 
 <body onload="init();">
 	<div id="favorites_btn" class="top_left_smcms_btn" ></div>
+	<div id="share_location_btn" class="top_left_smcms_btn" onclick="share_location();" ></div>
 	<div id="wifi_btn" class="top_left_smcms_btn" ></div>
 	<div id="location_btn" class="top_left_smcms_btn" ></div>
 	<div id="routing_btn" class="top_left_smcms_btn" ></div>
@@ -168,6 +357,7 @@
 		}
 	});
 	var	user_location_icon	= new all_normal_icons({iconUrl: 'maps/map-icon/user_location.png',iconRetinaUrl: 'maps/map-icon/user_location@2x.png',});
+	var	user_location_icon_friend	= new all_normal_icons({iconUrl: 'maps/map-icon/user_location_friend.png',iconRetinaUrl: 'maps/map-icon/user_location_friend@2x.png',});
 	var	from_icon			= new all_normal_icons({iconUrl: 'maps/map-icon/a.png',iconRetinaUrl: 'maps/map-icon/a@2x.png',});
 	var	to_icon				= new all_normal_icons({iconUrl: 'maps/map-icon/b.png',iconRetinaUrl: 'maps/map-icon/b@2x.png',});
 	
