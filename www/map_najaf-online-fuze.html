@@ -388,7 +388,7 @@
 
 
 
-	var offline_map = L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {maxZoom: 15}),
+	var offline_map = L.tileLayer('maps/mapquest/{z}/{x}/{y}.png', {maxZoom: 17}),
 		online_map  = L.tileLayer('http://imamali.net/app-json/map/{z}/{x}/{y}.png', {maxZoom: 18});
 	
 	//najaf//lat=32.0192&long=44.3298
@@ -402,7 +402,7 @@
 	var map_center = new L.latLng(lat_center,long_center);
 	var map = L.map('map', {
 		zoom: 14,
-		maxZoom: 15,//17
+		maxZoom: 17,//17
 		minZoom:1,
 		center: map_center,
 		layers: offline_map,//offline_map,//online_map,//L.tileLayer('maps/mapquest/{z}/{x}/{y}.png'),
@@ -682,7 +682,7 @@
 		function change_map_offline_function() {
 			map.removeLayer(online_map);
 			map.addLayer(offline_map);
-			map.options.maxZoom = 16;
+			map.options.maxZoom = 17;
 			
 			$("#wifi_btn").css("background-color","#c1c1c1");
 		}
