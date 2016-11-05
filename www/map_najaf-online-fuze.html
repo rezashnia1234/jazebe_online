@@ -276,10 +276,10 @@
 
 	<div class="cd-popup is-visible0 favorites" role="alert">
 		<div class="cd-popup-container">
-			<p><input id="favorite_title" id="favorite_title" placeholder="عنوان النقطة الجديدة" /></p>
+			<p><input id="favorite_title" id="favorite_title" placeholder="لطفا عنوان نقطه مورد نظر را وارد نمایید" /></p>
 			<ul class="cd-buttons">
 				<li><a href="#" onclick="add_to_favorites();">تاييد</a></li>
-				<li><a href="#" onclick="add_to_favorites_open();">الغاء</a></li>
+				<li><a href="#" onclick="add_to_favorites_open();">لغو</a></li>
 			</ul>
 			<!--<a href="#0" class="cd-popup-close img-replace">Close</a>-->
 		</div> <!-- cd-popup-container -->
@@ -677,7 +677,7 @@
 			map.addLayer(online_map);
 			map.options.maxZoom = 18;
 			
-			$("#wifi_btn").css("background-color","rgba(19, 165, 56, 1)");
+			$("#wifi_btn").css("background-color","#039d85");
 		}
 		function change_map_offline_function() {
 			map.removeLayer(online_map);

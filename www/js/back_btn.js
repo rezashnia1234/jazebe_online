@@ -407,7 +407,7 @@ function start_check_auto_location() {
 							function onConfirm(buttonIndex) {
 								if(buttonIndex==1)
 								{
-									window.location.href = "map_iraq.html";
+									window.location.href = "map_najaf-online-fuze.html";
 								}
 								else
 								{
